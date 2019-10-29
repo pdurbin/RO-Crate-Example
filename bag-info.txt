@@ -1,5 +1,5 @@
 Bag-Software-Agent: WholeTale version: 0.7
 BagIt-Profile-Identifier: https://raw.githubusercontent.com/fair-research/bdbag/master/profiles/bdbag-ro-profile.json
 Bagging-Date: 2019-10-29
-Bagging-Time: 18:27:27 UTC+00:00
-Payload-Oxum: 1672.4
+Bagging-Time: 23:20:31 UTC+00:00
+Payload-Oxum: 1672.6
