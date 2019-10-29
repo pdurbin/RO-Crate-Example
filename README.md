@@ -78,7 +78,7 @@ Legend:
 ```
 bag-info.txt (1)
 bagit.txt (1)
-data/ (3)
+data/ (1)
     LICENSE (3)
     workspace/ (3)
         analysis.R (3)
@@ -102,26 +102,6 @@ bag-info.txt (1)
 bagit.txt (1)
 data/ (1)
     ro-crate-metadata.jsonld (2)
-    data/ (3)
-        LICENSE (3)
-        workspace/ (3)
-            analysis.R (3)
-fetch.txt (1)
-manifest-md5.txt (1)
-manifest-sha256.txt (1)
-README.MD (3)
-run-local.sh (3)
-tagmanifest-md5.txt (1)
-tagmanifest-sha256.txt (1)
-```
-
-Or without the extra data directory
-
-```
-bag-info.txt (1)
-bagit.txt (1)
-data/ (1)
-    ro-crate-metadata.jsonld (2)
     LICENSE (3)
     workspace/ (3)
         analysis.R (3)
@@ -132,7 +112,7 @@ README.MD (3)
 run-local.sh (3)
 tagmanifest-md5.txt (1)
 tagmanifest-sha256.txt (1)
-
+```
 
 
 ## Metadata Changes
