@@ -37,7 +37,7 @@ From the RO-Crate spec,
 Payload files may appear directly in the RO-Crate Root alongside the RO-Crate Metadata File, and/or appear in sub-directories of the RO-Crate Root.
 ```
 
-This allows us to place RO-Crate artifacts along side the babgit artifacts, shown in the structure below. Note that the metadata directory will be depreciated/ merged into the ro-crate-metadata.jsonld file
+This allows us to place RO-Crate artifacts along side the bagit artifacts, shown in the structure below. Note that the metadata directory will be depreciated/ merged into the ro-crate-metadata.jsonld file
 
 Legend:
 
@@ -81,5 +81,129 @@ The _only_ requirement as far as additional files go is the inclusion of `ro-cra
 |   [payload files and directories]  # 1 or more SHOULD be present
 ```
 
+
+
+
+
+## Changes
+
+### Tale Creator
+
+The Tale creator is the entity that physically created the Tale. It's possible that this person created the Tale for another person that has done the actual analysis work. 
+
+#### Current
+
+We currently describe the author with `createdBy`, which is an attribute to to the core Tale metadata object.
+```
+{
+"@id": "https://data.wholetale.org/api/v1/tale/5db883ba7bf5ca3bf549cab3",
+"createdOn": "2019-10-29 18:23:54.476000",
+"createdBy": {
+    "@id": "tommythelen@gmail.com",
+    "@type": "schema:Person",
+    "schema:email": "tommythelen@gmail.com",
+    "schema:familyName": "T",
+    "schema:givenName": "Thomas"
+    }
+}
+```
+
+#### RO-Crate
+
+With RO-Crate, the Tale Creator is listed as the `contactPoint`, which is assigned to the chuck of metadata describing the overall Tale. Note that this _doesn't have to be an ORCID_. An email will suffice (see example in RO-Crate spec). After specifying the `contactPoint`, we go even further to describe that entity outside of the Tale context. 
+
+```
+{
+   "@id": "./",
+   "identifier": "5db883ba7bf5ca3bf549cab3",
+   "@type": "Dataset",
+   "datePublished": "2019",
+   "name": "Quantitative and Qualitative Longitudinal Public Opinion Survey Research on Salmon and Alaska",
+   "distribution": {
+       "@id": "https://data.wholetale.org/api/v1/tale/5db883ba7bf5ca3bf549cab3"
+   },
+   
+   "contactPoint": {
+       "@id": "http://orcid.org/0000-0002-1756-2128"
+     }
+},
+
+{
+    "@id": "http://orcid.org/0000-0002-1756-2128",
+    "@type": Person,
+    "email": "tommythelen@gmail.com",
+    "familyName": "Thelen",
+    "givenName": "Thomas"
+}
+```
+
+### Tale Authors
+
+Tale Authors are entities that should be given credit to the code or to the data used in the Tale. Note that we can have multiple authors, which isn't shown here.
+
+#### Current
+
+We currently describe Tale authors using schema.
+
+```
+{
+    "@id": "https://data.wholetale.org/api/v1/tale/5db883ba7bf5ca3bf549cab3",
+    "createdOn": "2019-10-29 18:23:54.476000",
+    "schema:author": [
+        {
+            "@id": "https://orcid.org/0000-0003-3911-3304",
+            "@type": "schema:Person",
+            "schema:familyName": "Harrington",
+            "schema:givenName": "Erin"
+        }
+    ],
+}
+```
+
+#### RO-Crate
+
+Note that the RO-Crate author isn't an array. I need to confirm that this can be done.
+```
+{
+    "@id": "https://data.wholetale.org/api/v1/tale/5db883ba7bf5ca3bf549cab3",
+    "createdOn": "2019-10-29 18:23:54.476000",
+    "author": {"@id": "https://orcid.org/0000-0003-3911-3304"},
+}
+
+{
+    "@id": "https://orcid.org/0000-0003-3911-3304",
+    "@type": "Person",
+    "familyName": "Harrington",
+    "givenName": "Erin"
+}
+```
+
+#### Further Discussion
+
+In Whole Tale, we may want to 
+
+1. Make the Tale Creator the Author & `contactPoint`
+2. Make current Authors [schema:contributor](https://schema.org/contributor) 
+
+
+### External Data
+
+#### Current:
+
+We currently use RO-Bundle to describe files that exist remotely, and where they should exist locally when downloaded.
+
+```
+{
+    "uri": "https://cn.dataone.org/cn/v2/resolve/urn:uuid:9d00544e-c206-47be-a875-2822821d2a94",
+    "bundledAs": {
+        "filename": "2015_Benchmark_Verbatims_Feb_2015.xlsx",
+        "folder": "../data/data/Quantitative and Qualitative Longitudinal Public Opinion Survey Research on Salmon and Alaska, including Values, Tradeoffs and Preferences/"
+    },
+    "size": 260096,
+    "schema:isPartOf": "urn:uuid:c781356d-5306-4aa2-b633-7f8bc768c093"
+}
+```
+
+#### RO-Crate
 
 
