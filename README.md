@@ -134,7 +134,7 @@ With RO-Crate, the Tale Creator is listed as the `contactPoint`, which is assign
 }
 ```
 
-The RO-Crate spec states the the type of the object pointed to by @id for the `contactPoint` _SHOULD_ be  [ContactPoint](https://schema.org/ContactPoint). This may get confusing when the same entity fulfills multiple roles. If we do this, the last portion of the metadata above would look like. It's not clear whether we'd include another record for the creator as a `Person` type. The specification does this however, they use the ORCID as the @id for the `Person`, declare `contactPoint` inside that structure, but use their email as the @id. Then, they create the record where the person is of type `ContactPoint` however, they use the email address as the @id. I'm not sure why
+The RO-Crate spec states the the type of the object pointed to by @id for the `contactPoint` _SHOULD_ be  [ContactPoint](https://schema.org/ContactPoint). This may get confusing when the same entity fulfills multiple roles. If we do this, the last portion of the metadata above would look like. It's not clear whether we'd include another record for the creator as a `Person` type. The specification does this however, they use the ORCID as the @id for the `Person`, declare `contactPoint` inside that structure, but use their email as the @id. Then, they create the record where the person is of type `ContactPoint` however, they use the email address as the @id. I'm not sure why.
 
 ```
 
@@ -199,7 +199,8 @@ In Whole Tale, we may want to
 
 #### Current:
 
-We currently use RO-Bundle to describe files that exist remotely, and where they should exist locally when downloaded.
+We currently use RO-Bundle to describe files that exist remotely, and where they should exist locally when downloaded. We also document/link the file to the larger dataset that the file belongs to.
+
 
 ```
 {
@@ -221,6 +222,8 @@ We currently use RO-Bundle to describe files that exist remotely, and where they
 #### Current
 
 ```
+"@id": "https://data.wholetale.org/api/v1/tale/5db883ba7bf5ca3bf549cab3",
+"createdOn": "2019-10-29 18:23:54.476000",
 "aggregates" [
     {
         "uri": "../data/workspace/analysis.R",
@@ -232,6 +235,26 @@ We currently use RO-Bundle to describe files that exist remotely, and where they
 ```
 
 #### RO-Crate
+
+
+```
+"@id": "https://data.wholetale.org/api/v1/tale/5db883ba7bf5ca3bf549cab3",
+"createdOn": "2019-10-29 18:23:54.476000",
+"hasPart" [
+     {
+       "@id": "data/workspace/analysis.R"
+     },
+]
+{
+  "@id": "data/workspace/analysis.R",
+  "@type": "File",
+  "contentSize": "0",
+  "encodingFormat": "application/octet-stream"
+}
+```
+
+
+
 
 ### Datasets
 
