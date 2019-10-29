@@ -85,29 +85,29 @@ The _only_ requirement as far as additional files go is the inclusion of `ro-cra
 ## Changes
 
 
-- [Tale Creator](#Tale Creator)
+- [Tale Creator](#Tale-Creator)
   * [Current](#Current)
   * [RO-Crate](#RO-Crate)
-- [Tale Authors](#Tale Authors)
+- [Tale Authors](#Tale-Authors)
   * [Current](#Current)
   * [RO-Crate](#RO-Crate)
-- [External Data](#External Data)
+- [External Data](#External-Data)
   * [Current](#Current)
   * [RO-Crate](#RO-Crate)
-- [Physical Data](#Physical Data)
+- [Physical Data](#Physical-Data)
   * [Current](#Current)
   * [RO-Crate](#RO-Crate)
 - [Datasets](#Datasets)
   * [Current](#Current)
   * [RO-Crate](#RO-Crate)
-- [Misc Tale Properties](#Misc Tale Properties)
+- [Misc Tale Properties](#Misc-Tale-Properties)
   * [Current](#Current)
   * [RO-Crate](#RO-Crate)
     
     
 
 
-### Tale Creator
+### Tale-Creator
 
 The Tale creator is the entity that physically created the Tale. It's possible that this person created the Tale for another person that has done the actual analysis work. 
 
@@ -169,7 +169,7 @@ The RO-Crate spec states the the type of the object pointed to by @id for the `c
 ```
 
 
-### Tale Authors
+### Tale-Authors
 
 Tale Authors are entities that should be given credit to the code or to the data used in the Tale. Note that we can have multiple authors, which isn't shown here.
 
@@ -218,7 +218,7 @@ In Whole Tale, we may want to
 2. Make current Authors [schema:contributor](https://schema.org/contributor)
 
 
-### External Data
+### External-Data
 
 #### Current:
 
@@ -244,7 +244,7 @@ We currently use RO-Bundle to describe files that exist remotely, and where they
 ```
 
 
-### Physical Data
+### Physical-Data
 
 #### Current
 
@@ -294,7 +294,7 @@ We currently use RO-Bundle to describe files that exist remotely, and where they
 #### RO-Crate
 
 
-### Misc Tale Properties
+### Misc-Tale-Properties
 
 We have a number of miscellaneous Tale properties that already use schema. We should make sure these make sense and are used properly within an RO-Crate.
 
