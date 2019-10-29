@@ -41,9 +41,12 @@ This allows us to place RO-Crate artifacts along side the babgit artifacts, show
 
 Legend:
 (1) File from BagIt
+
 (2) File from RO-Crate
+
 (3) File from Whole Tale
 
+```
 bag-info.txt (1)
 bagit.txt (1)
 data/ (3)
@@ -61,7 +64,7 @@ ro-crate-metadata.jsonld (2)
 run-local.sh (3)
 tagmanifest-md5.txt (1)
 tagmanifest-sha256.txt (1)
-
+```
 
 Note that the RO-Crate artifacts at the top level _should_ be classified as tag files with respect to bagit.
 
