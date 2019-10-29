@@ -1,0 +1,4 @@
+d41d8cd98f00b204e9800998ecf8427e data/workspace/analysis.R
+f704787f3845c0e05db4e199e010047c run-local.sh
+81faaedac351f28092bd845a48c6d0a5 data/LICENSE
+5b9a198dc32c1f7fe680eb16f712f2db README.md
