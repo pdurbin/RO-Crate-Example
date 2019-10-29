@@ -137,6 +137,18 @@ With RO-Crate, the Tale Creator is listed as the `contactPoint`, which is assign
 }
 ```
 
+The RO-Crate spec states the the type of the object pointed to by @id for the `contactPoint` _SHOULD_ be  [ContactPoint](https://schema.org/ContactPoint). This may get confusing when the same entity fulfills multiple roles. If we do this, the last portion of the metadata above would look like. It's not clear whether we'd include another record for the creator as a `Person` type. The specification does this however, they use the ORCID as the @id for the `Person`, declare `contactPoint` inside that structure, but use their email as the @id. Then, they create the record where the person is of type `ContactPoint` however, they use the email address as the @id. I'm not sure why
+
+```
+
+{
+    "@id": "http://orcid.org/0000-0002-1756-2128",
+    "@type": ContactPoint,
+    "email": "tommythelen@gmail.com",
+}
+```
+
+
 ### Tale Authors
 
 Tale Authors are entities that should be given credit to the code or to the data used in the Tale. Note that we can have multiple authors, which isn't shown here.
@@ -182,8 +194,8 @@ Note that the RO-Crate author isn't an array. I need to confirm that this can be
 
 In Whole Tale, we may want to 
 
-1. Make the Tale Creator the Author & `contactPoint`
-2. Make current Authors [schema:contributor](https://schema.org/contributor) 
+1. Merge the Author and Creator (point `contactPoint` and `author` to the Tale Creator)
+2. Make current Authors [schema:contributor](https://schema.org/contributor)
 
 
 ### External Data
@@ -207,3 +219,47 @@ We currently use RO-Bundle to describe files that exist remotely, and where they
 #### RO-Crate
 
 
+### Physical Data
+
+#### Current
+
+```
+"aggregates" [
+    {
+        "uri": "../data/workspace/analysis.R",
+        "size": 0,
+        "mimeType": "application/octet-stream",
+        "md5": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+]
+```
+
+#### RO-Crate
+
+### Datasets
+
+#### Current
+
+#### RO-Crate
+
+
+### Misc Tale Properties
+
+We have a number of miscellaneous Tale properties that already use schema. We should make sure these make sense and are used properly within an RO-Crate.
+
+#### Current
+
+```
+ "schema:name": "Quantitative and Qualitative Longitudinal Public Opinion Survey Research on Salmon and Alaska",
+ "schema:description": "#### Markdown Editor",
+ "schema:identifier": "5db883ba7bf5ca3bf549cab3",
+ "schema:image": "https://raw.githubusercontent.com/whole-tale/dashboard/master/public/images/demo-graph2.jpg",
+ "schema:version": 7,
+ "schema:category": "science",
+ "@id": "https://data.wholetale.org/api/v1/tale/5db883ba7bf5ca3bf549cab3",
+ "createdOn": "2019-10-29 18:23:54.476000",
+```
+
+
+
+#### RO-Crate
