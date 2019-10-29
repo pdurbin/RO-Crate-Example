@@ -40,6 +40,7 @@ Payload files may appear directly in the RO-Crate Root alongside the RO-Crate Me
 This allows us to place RO-Crate artifacts along side the babgit artifacts, shown in the structure below. Note that the metadata directory will be depreciated/ merged into the ro-crate-metadata.jsonld file
 
 Legend:
+
 (1) File from BagIt
 
 (2) File from RO-Crate
