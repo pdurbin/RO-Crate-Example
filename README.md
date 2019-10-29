@@ -22,7 +22,7 @@ This repository uses the Quantitative and Qualitative Longitudinal Public Opinio
 Some key characteristics of this Tale are
 1. The use of an external dataset
 1. The use of manually uploaded files (ie use of the Tale workspace)
-1. Attribution to a single author (entities that deserve credit for code + data)
+1. Attribution to multiple authors (entities that deserve credit for code + data)
 1. A single creator (The person that actually created the Tale)
 
 Note that the Tale comes with a README, which has been renamed to README copy.md so that it doesn't conflict with this readme (the one you're currently reading).
@@ -57,10 +57,9 @@ One key question that remains is where we should place the RO-Crate Root. This i
 
 Some things don't change between formats. 
 
-1. `ro-crate-metadata.jsonld` is a tag file
-2. `run-local.sh` is a tag file
-3. `README.MD` is a tag file
-4. `fetch.txt` is a tag file
+1. `run-local.sh` is a tag file
+1. `README.MD` is a tag file
+1. `fetch.txt` is a tag file
 
 
 ### RO-Crate Root at Bag Root
@@ -208,10 +207,8 @@ With RO-Crate, the Tale Creator is listed as the `contactPoint`, which is assign
 }
 ```
 
-The RO-Crate spec states the the type of the object pointed to by @id for the `contactPoint` _SHOULD_ be  [ContactPoint](https://schema.org/ContactPoint). This may get confusing when the same entity fulfills multiple roles. If we do this, the last portion of the metadata above would look like. It's not clear whether we'd include another record for the creator as a `Person` type. The specification does this however, they use the ORCID as the @id for the `Person`, declare `contactPoint` inside that structure, but use their email as the @id. Then, they create the record where the person is of type `ContactPoint` however, they use the email address as the @id. I'm not sure why.
-
+The RO-Crate spec states the the type of the object pointed to by @id for the `contactPoint` _SHOULD_ be  [ContactPoint](https://schema.org/ContactPoint). This may get confusing when the same entity fulfills multiple roles. For example, this Tale has an author that's also the `contactPoint`. The spec requires the person to be listed as type `ContactPoint`, but should also be listed as type `Person`. This is a required field to be considered a valid RO. 
 ```
-
 {
     "@id": "http://orcid.org/0000-0002-1756-2128",
     "@type": ContactPoint,
@@ -238,6 +235,12 @@ We currently describe Tale authors using schema.
             "@type": "schema:Person",
             "schema:familyName": "Harrington",
             "schema:givenName": "Erin"
+        },
+        {
+            "@id": "http://orcid.org/0000-0002-1756-2128",
+            "@type": "schema:Person",
+            "schema:familyName": "Thelen",
+            "schema:givenName": "Thomas"
         }
     ],
 }
@@ -245,19 +248,32 @@ We currently describe Tale authors using schema.
 
 #### RO-Crate
 
-Note that the RO-Crate author isn't an array. I need to confirm that this can be done.
+The Author descriptions are done in a similar fashion to the contactPoint.
+
 ```
 {
-    "@id": "https://data.wholetale.org/api/v1/tale/5db883ba7bf5ca3bf549cab3",
-    "createdOn": "2019-10-29 18:23:54.476000",
-    "author": {"@id": "https://orcid.org/0000-0003-3911-3304"},
-}
+    {
+        "@id": "https://data.wholetale.org/api/v1/tale/5db883ba7bf5ca3bf549cab3",
+        "createdOn": "2019-10-29 18:23:54.476000",
+        "author": [
+            {"@id": "https://orcid.org/0000-0003-3911-3304"},
+            {"@id": "http://orcid.org/0000-0002-1756-2128"},
+        ],
+    },
 
-{
-    "@id": "https://orcid.org/0000-0003-3911-3304",
-    "@type": "Person",
-    "familyName": "Harrington",
-    "givenName": "Erin"
+    {
+        "@id": "https://orcid.org/0000-0003-3911-3304",
+        "@type": "Person",
+        "familyName": "Harrington",
+        "givenName": "Erin"
+    },
+
+    {
+        "@id": "http://orcid.org/0000-0002-1756-2128",
+        "@type": "Person",
+        "familyName": "Thelen",
+        "givenName": "Thomas"
+    },
 }
 ```
 
@@ -267,7 +283,7 @@ In Whole Tale, we may want to
 
 1. Merge the Author and Creator (point `contactPoint` and `author` to the Tale Creator)
 2. Make current Authors [schema:contributor](https://schema.org/contributor)
-
+3. I need to confirm we can have multiple authors/contributors
 
 ### External-Data
 
@@ -316,22 +332,38 @@ We currently use RO-Bundle to describe files that exist remotely, and where they
 
 #### RO-Crate
 
+One difference is that RO-Crate includes a record for directories. Note that the file/directory descriptions are inside the graph.
 
 ```
 {
     "@id": "https://data.wholetale.org/api/v1/tale/5db883ba7bf5ca3bf549cab3",
     "createdOn": "2019-10-29 18:23:54.476000",
-    "hasPart" [
+    "@graph": [
+     {
+       "@id": "./data",
+       "@type": [
+         "Dataset"
+       ],
+       "hasPart" [
         {
-            "@id": "data/workspace/analysis.R"
+            "@id": "./data/workspace"
+        },
+        {
+            "@id": "./data/workspace/analysis.R"
         },
     ]
+
     {
         "@id": "data/workspace/analysis.R",
         "@type": "File",
         "contentSize": "0",
         "encodingFormat": "application/octet-stream"
-    }
+    },
+    {
+        "uri": "../data/workspace",
+        "@type": "Dataset",
+    },
+    ]
 }
 ```
 
@@ -365,3 +397,14 @@ We have a number of miscellaneous Tale properties that already use schema. We sh
 
 
 #### RO-Crate
+
+
+
+
+## To-Do
+
+1. Resolve where we put the RO-Crate Root
+1. Check if RO-Crate allows multiple authors (it should)
+1. Should we turn the author into a contributor, and then merge the author and creator?
+1. Resolve `contactPoint` weirdness
+1. Do we _really_ need to include entries for directories?
