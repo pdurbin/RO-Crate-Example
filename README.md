@@ -84,6 +84,29 @@ The _only_ requirement as far as additional files go is the inclusion of `ro-cra
 
 ## Changes
 
+
+- [Tale Creator](#Tale Creator)
+  * [Current](#Current)
+  * [RO-Crate](#RO-Crate)
+- [Tale Authors](#Tale Authors)
+  * [Current](#Current)
+  * [RO-Crate](#RO-Crate)
+- [External Data](#External Data)
+  * [Current](#Current)
+  * [RO-Crate](#RO-Crate)
+- [Physical Data](#Physical Data)
+  * [Current](#Current)
+  * [RO-Crate](#RO-Crate)
+- [Datasets](#Datasets)
+  * [Current](#Current)
+  * [RO-Crate](#RO-Crate)
+- [Misc Tale Properties](#Misc Tale Properties)
+  * [Current](#Current)
+  * [RO-Crate](#RO-Crate)
+    
+    
+
+
 ### Tale Creator
 
 The Tale creator is the entity that physically created the Tale. It's possible that this person created the Tale for another person that has done the actual analysis work. 
@@ -216,40 +239,48 @@ We currently use RO-Bundle to describe files that exist remotely, and where they
 
 #### RO-Crate
 
+```
+
+```
+
 
 ### Physical Data
 
 #### Current
 
 ```
-"@id": "https://data.wholetale.org/api/v1/tale/5db883ba7bf5ca3bf549cab3",
-"createdOn": "2019-10-29 18:23:54.476000",
-"aggregates" [
-    {
-        "uri": "../data/workspace/analysis.R",
-        "size": 0,
-        "mimeType": "application/octet-stream",
-        "md5": "d41d8cd98f00b204e9800998ecf8427e"
-    },
-]
+{
+    "@id": "https://data.wholetale.org/api/v1/tale/5db883ba7bf5ca3bf549cab3",
+    "createdOn": "2019-10-29 18:23:54.476000",
+    "aggregates" [
+        {
+            "uri": "../data/workspace/analysis.R",
+            "size": 0,
+            "mimeType": "application/octet-stream",
+            "md5": "d41d8cd98f00b204e9800998ecf8427e"
+        },
+    ]
+}
 ```
 
 #### RO-Crate
 
 
 ```
-"@id": "https://data.wholetale.org/api/v1/tale/5db883ba7bf5ca3bf549cab3",
-"createdOn": "2019-10-29 18:23:54.476000",
-"hasPart" [
-     {
-       "@id": "data/workspace/analysis.R"
-     },
-]
 {
-  "@id": "data/workspace/analysis.R",
-  "@type": "File",
-  "contentSize": "0",
-  "encodingFormat": "application/octet-stream"
+    "@id": "https://data.wholetale.org/api/v1/tale/5db883ba7bf5ca3bf549cab3",
+    "createdOn": "2019-10-29 18:23:54.476000",
+    "hasPart" [
+        {
+            "@id": "data/workspace/analysis.R"
+        },
+    ]
+    {
+        "@id": "data/workspace/analysis.R",
+        "@type": "File",
+        "contentSize": "0",
+        "encodingFormat": "application/octet-stream"
+    }
 }
 ```
 
