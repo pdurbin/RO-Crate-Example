@@ -37,7 +37,7 @@ From the RO-Crate spec,
 Payload files may appear directly in the RO-Crate Root alongside the RO-Crate Metadata File, and/or appear in sub-directories of the RO-Crate Root.
 ```
 
-This allows us to place RO-Crate artifacts along side the bagit artifacts, shown in the structure below. Note that the metadata directory will be depreciated/ merged into the ro-crate-metadata.jsonld file
+This allows us to place RO-Crate artifacts along side the bagit artifacts, shown in the structure below.
 
 Legend:
 
@@ -57,9 +57,6 @@ data/ (3)
 fetch.txt (1)
 manifest-md5.txt (1)
 manifest-sha256.txt (1)
-metadata/
-    environment.json
-    manifest.json
 README.MD
 ro-crate-metadata.jsonld (2)
 run-local.sh (3)
