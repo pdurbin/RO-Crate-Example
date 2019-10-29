@@ -27,17 +27,45 @@ Some key characteristics of this Tale are
 
 Note that the Tale comes with a README, which has been renamed to README copy.md so that it doesn't conflict with this readme.
 
-## Serialization
+## File Diretory Changes
 
-Whole Tale supports exporting to the bagit specification, which is compatible with RO-Crate.
+Whole Tale supports exporting to the bagit specification, which is compatible with RO-Crate. 
 
-From the RO-Crate spec,
+Key elements from the spec include
 
 ```
 Payload files may appear directly in the RO-Crate Root alongside the RO-Crate Metadata File, and/or appear in sub-directories of the RO-Crate Root.
 ```
 
-This allows us to place RO-Crate artifacts along side the bagit artifacts, shown in the structure below.
+This allows us to place the Crate payload in the same directory as the Crate Root or within a subdirectory. This is further supported with the blurb below.
+
+```
+<RO-Crate root directory>/
+|   ro-crate-metadata.jsonld  # _RO-Crate Metadata File_ MUST be present
+|   ro-crate-preview.html     # _RO-Crate Website_ homepage MAY be present
+|   ro-crate-preview_files/   # MAY be present
+|    | [_RO-Crate Website_ files]
+|   [payload files and directories]  # 1 or more SHOULD be present
+```
+
+
+The _only_ requirement as far as additional files go is the inclusion of `ro-crate-metadata.jsonld` which is present in this repository. I have not added support for the additional files that MAY be present, outlined below (taken from the spec)
+
+
+### Invariants
+
+Some things don't change between formats. 
+
+1. `ro-crate-metadata.jsonld` is a tag file
+2. `run-local.sh` is a tag file
+3. `README.MD` is a tag file
+4. `fetch.txt` is a tag file
+
+
+
+### RO-Crate Root at Bag Root
+
+This first example shows what a Tale looks like when the RO-Crate Root is in the same location as the Bag Root
 
 Legend:
 
@@ -57,32 +85,57 @@ data/ (3)
 fetch.txt (1)
 manifest-md5.txt (1)
 manifest-sha256.txt (1)
-README.MD
+README.MD (3)
 ro-crate-metadata.jsonld (2)
 run-local.sh (3)
 tagmanifest-md5.txt (1)
 tagmanifest-sha256.txt (1)
 ```
 
-Note that the RO-Crate artifacts at the top level _should_ be classified as tag files with respect to bagit.
 
+### RO-Crate Root in Bag Payload
 
-The _only_ requirement as far as additional files go is the inclusion of `ro-crate-metadata.jsonld` which is present in this repository. I have not added support for the additional files that MAY be present, outlined below (taken from the spec)
+We can also place the RO-Crate Root in the bag payload.
 
 ```
-<RO-Crate root directory>/
-|   ro-crate-metadata.jsonld  # _RO-Crate Metadata File_ MUST be present
-|   ro-crate-preview.html     # _RO-Crate Website_ homepage MAY be present
-|   ro-crate-preview_files/   # MAY be present
-|    | [_RO-Crate Website_ files]
-|   [payload files and directories]  # 1 or more SHOULD be present
+bag-info.txt (1)
+bagit.txt (1)
+data/ (1)
+    ro-crate-metadata.jsonld (2)
+    data/ (3)
+        LICENSE (3)
+        workspace/ (3)
+            analysis.R (3)
+fetch.txt (1)
+manifest-md5.txt (1)
+manifest-sha256.txt (1)
+README.MD (3)
+run-local.sh (3)
+tagmanifest-md5.txt (1)
+tagmanifest-sha256.txt (1)
 ```
 
+Or without the extra data directory
+
+```
+bag-info.txt (1)
+bagit.txt (1)
+data/ (1)
+    ro-crate-metadata.jsonld (2)
+    LICENSE (3)
+    workspace/ (3)
+        analysis.R (3)
+fetch.txt (1)
+manifest-md5.txt (1)
+manifest-sha256.txt (1)
+README.MD (3)
+run-local.sh (3)
+tagmanifest-md5.txt (1)
+tagmanifest-sha256.txt (1)
 
 
 
-
-## Changes
+## Metadata Changes
 
 
 - [Tale Creator](#Tale-Creator)
