@@ -6,7 +6,7 @@ An example of a Tale serialize under the RO-Crate draft specification
 
 ## Background
 
-Whole Tale currently serializes Tale information and research artifacts according to the BagIt-RO specification, which can be found [here](https://github.com/ResearchObject/bagit-ro). To see an example of this format in action, visit dashboard.wholetale.org and [export a Tale as bag](https://wholetale.readthedocs.io/en/stable/users_guide/export_run.html). You'll find the metadata descriptions in the `metadata` folder.
+Whole Tale currently serializes Tale information and research artifacts according to the BagIt-RO and RO Bundle specifications, which can be found [here](https://github.com/ResearchObject/bagit-ro ) and [here](https://researchobject.github.io/specifications/bundle/). To see an example of this format in action, visit https://dashboard.wholetale.org/ and [export a Tale as bag](https://wholetale.readthedocs.io/en/stable/users_guide/export_run.html). You'll find the metadata descriptions in the `metadata/` folder.
 
 The Research Object team has come out with a new specification, RO-Crate, and the Whole Tale project is interested in
 1. What a Tale serialized in this format would look like
@@ -22,22 +22,20 @@ This repository uses the Quantitative and Qualitative Longitudinal Public Opinio
 Some key characteristics of this Tale are
 1. The use of an external dataset
 1. The use of manually uploaded files (ie use of the Tale workspace)
-1. Attribution to multiple authors (entities that deserve credit for code + data)
+1. Attribution to a single author (entities that deserve credit for code + data)
 1. A single creator (The person that actually created the Tale)
 
-Note that the Tale comes with a README, which has been renamed to README copy.md so that it doesn't conflict with this readme.
+Note that the Tale comes with a README, which has been renamed to README copy.md so that it doesn't conflict with this readme (the one you're currently reading).
 
 ## File Diretory Changes
 
-Whole Tale supports exporting to the bagit specification, which is compatible with RO-Crate. 
+Adopting RO-Crate will change the directory of exported Tales, minimally.
 
 Key elements from the spec include
 
-```
-Payload files may appear directly in the RO-Crate Root alongside the RO-Crate Metadata File, and/or appear in sub-directories of the RO-Crate Root.
-```
+`Payload files may appear directly in the RO-Crate Root alongside the RO-Crate Metadata File, and/or appear in sub-directories of the RO-Crate Root.`
 
-This allows us to place the Crate payload in the same directory as the Crate Root or within a subdirectory. This is further supported with the blurb below.
+This allows us to place the Crate payload in the same directory as the RO-Crate Root or within a subdirectory. This is further supported with the blurb below.
 
 ```
 <RO-Crate root directory>/
@@ -49,8 +47,11 @@ This allows us to place the Crate payload in the same directory as the Crate Roo
 ```
 
 
-The _only_ requirement as far as additional files go is the inclusion of `ro-crate-metadata.jsonld` which is present in this repository. I have not added support for the additional files that MAY be present, outlined below (taken from the spec)
+The _only_ requirement as far as additional files go is the inclusion of `ro-crate-metadata.jsonld` which is present in this repository. I have not added support for the additional files that MAY be present, outlined below (taken from the spec). Note that the RO-Crate Root is determined by the location of `ro-crate-metadata.jsonld`.
 
+`RO-Crate Root: The top-level directory of the RO-Crate, indicated by the presence of the RO-Crate Metadata File ro-crate-metadata.jsonld`
+
+One key question that remains is where we should place the RO-Crate Root. This is explored below.
 
 ### Invariants
 
@@ -60,7 +61,6 @@ Some things don't change between formats.
 2. `run-local.sh` is a tag file
 3. `README.MD` is a tag file
 4. `fetch.txt` is a tag file
-
 
 
 ### RO-Crate Root at Bag Root
@@ -92,6 +92,15 @@ tagmanifest-md5.txt (1)
 tagmanifest-sha256.txt (1)
 ```
 
+#### Advantages
+
+1. It's minimally invasive. We've gotten rid of the `metadata/` directory and keep the exact same `data/` structure.
+2. Defines the bag _as_ a Research Object (rather than a bag that contains a Research Object)
+
+#### Disadvantages
+
+1. More `stuff` in the root directory which is an eye sore and confusing (opinion)
+
 
 ### RO-Crate Root in Bag Payload
 
@@ -114,6 +123,15 @@ tagmanifest-md5.txt (1)
 tagmanifest-sha256.txt (1)
 ```
 
+#### Advantages
+
+1. Less `stuff` in the bag root.
+2. Defines a bag that _contains_ a Research Object (rather than a bag that _is_)
+3. Minimally invasive. We still get to throw WT things into the `data/` directory
+
+#### Disadvantages
+
+1. More `stuff` in the data directory
 
 ## Metadata Changes
 
