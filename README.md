@@ -132,6 +132,25 @@ tagmanifest-sha256.txt (1)
 
 1. More `stuff` in the data directory
 
+
+### Summary
+
+It doesn't make much of a difference where we decide to place `ro-crate-metadata.jsonld`. Peter Sefton on the RO-Crate team gave his opinion on the two, and seemed to be impartial.
+
+```
+The DataCrate format which informed RO-Crate explicitly stated that the
+metadata should be in the root directory, but RO-Crate is agnostic on this
+point - you can do either.
+
+The first approach means that:
+Metadata (including the ro-crate-preview.html file you have not shown) is
+more discoverable when someone opens the bagit archive
+You can change the metadata without changing the payload / checksums
+
+The second gives you more assurance that the files are as expected as the
+metadata and preview files have checksums.
+```
+
 ## Metadata Changes
 
 
@@ -301,12 +320,72 @@ We currently use RO-Bundle to describe files that exist remotely, and where they
     },
     "size": 260096,
     "schema:isPartOf": "urn:uuid:c781356d-5306-4aa2-b633-7f8bc768c093"
-}
+},
+
+{
+    "uri": "https://cn.dataone.org/cn/v2/resolve/urn:uuid:cfc3c111-155b-4ab9-958b-5f3bba6d3dde",
+    "bundledAs": {
+        "filename": "2014_Benchmark_FINAL_Survey_Report.pdf",
+        "folder": "../data/data/Quantitative and Qualitative Longitudinal Public Opinion Survey Research on Salmon and Alaska, including Values, Tradeoffs and Preferences/"
+    },
+    "size": 754952,
+    "schema:isPartOf": "urn:uuid:c781356d-5306-4aa2-b633-7f8bc768c093"
+},
+
+"Datasets": [
+    {
+        "@id": "urn:uuid:c781356d-5306-4aa2-b633-7f8bc768c093",
+        "name": "Quantitative and Qualitative Longitudinal Public Opinion Survey Research on Salmon and Alaska, including Values, Tradeoffs and Preferences",
+        "@type": "Dataset",
+        "identifier": "urn:uuid:c781356d-5306-4aa2-b633-7f8bc768c093"
+    }
+]
 ```
 
 #### RO-Crate
 
+Desribing external data with RO-Crate is quite cumbersome. Instead of listing files and pointing them to a repository, we now define the repository and list all of the assosiated files within it with `hasMember` (using the web URI as the @id). Next, we loop over each element in `hasMemeber` and create a new metadata structure that has type `RepositoryObject`. Within this structure we can define the license, title, etc. The important part is that we can define the local location of where this file should go with `hasFile`. Finally, once we have these structures built, we create a new entry for each local file that we defined. See below.  
+
 ```
+{
+    "@id":https://cn.dataone.org/cn/v2/resolve/urn:uuid:c781356d-5306-4aa2-b633-7f8bc768c093",
+    "@type":["RepositoryCollection"],
+    "title": ["Quantitative and Qualitative Longitudinal Public Opinion Survey Research on Salmon and Alaska, including Values, Tradeoffs and Preferences"],
+    "hasMember":[
+        {"@id":"https://cn.dataone.org/cn/v2/resolve/urn:uuid:9d00544e-c206-47be-a875-2822821d2a94"},
+        {"@id":"https://cn.dataone.org/cn/v2/resolve/urn:uuid:cfc3c111-155b-4ab9-958b-5f3bba6d3dde"},
+    ]
+},
+
+{
+    "@id": "https://cn.dataone.org/cn/v2/resolve/urn:uuid:9d00544e-c206-47be-a875-2822821d2a94",
+    "@type": "RepositoryObject",
+    "title":["2015_Benchmark_Verbatims_Feb_2015.xlsx"],
+    "identifier":"urn:uuid:9d00544e-c206-47be-a875-2822821d2a94",
+    "hasFile": [
+        {"@id": "./data/Quantitative and Qualitative Longitudinal Public Opinion Survey Research on Salmon and Alaska, including Values, Tradeoffs and Preferences/2015_Benchmark_Verbatims_Feb_2015.xlsx"
+    ]}
+}
+
+{
+    "@id": "https://cn.dataone.org/cn/v2/resolve/urn:uuid:cfc3c111-155b-4ab9-958b-5f3bba6d3dde",
+    "@type": "RepositoryObject",
+    "title":["2014_Benchmark_FINAL_Survey_Report.pdf"],
+    "identifier":"urn:uuid:cfc3c111-155b-4ab9-958b-5f3bba6d3dde",
+    "hasFile": [
+        {"@id": "./data/Quantitative and Qualitative Longitudinal Public Opinion Survey Research on Salmon and Alaska, including Values, Tradeoffs and Preferences/2014_Benchmark_FINAL_Survey_Report.pdf"
+    ]}
+}
+
+{
+    "@type: "File",
+    "@id": "./data/Quantitative and Qualitative Longitudinal Public Opinion Survey Research on Salmon and Alaska, including Values, Tradeoffs and Preferences/2015_Benchmark_Verbatims_Feb_2015.xlsx"
+}
+
+{
+    "@type: "File",
+    "@id": "./data/Quantitative and Qualitative Longitudinal Public Opinion Survey Research on Salmon and Alaska, including Values, Tradeoffs and Preferences/2014_Benchmark_FINAL_Survey_Report.pdf"
+}
 
 ```
 
@@ -404,7 +483,6 @@ We have a number of miscellaneous Tale properties that already use schema. We sh
 ## To-Do
 
 1. Resolve where we put the RO-Crate Root
-1. Check if RO-Crate allows multiple authors (it should)
 1. Should we turn the author into a contributor, and then merge the author and creator?
 1. Resolve `contactPoint` weirdness
 1. Do we _really_ need to include entries for directories?
