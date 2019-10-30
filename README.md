@@ -31,6 +31,13 @@ Note that the Tale comes with a README, which has been renamed to README copy.md
 
 1. It looks like RO-Crate describes external data from http sources and repositories differently (there are only mentions of repository objects). This example only includes external data from a repository
 
+## Resources
+
+1. [RO-Crate 2.0 Spec](https://researchobject.github.io/ro-crate/0.2/)
+
+1. [RO-Crate GitHub](https://github.com/ResearchObject/ro-crate)
+
+1. [RO-Crate Meeting Notes](https://docs.google.com/document/d/1vg805CJ4QXY6CCBNR-8ETgkbOCAMqSKJPCKOTNxrIbk)
 
 ## File Diretory Changes
 
