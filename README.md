@@ -27,6 +27,11 @@ Some key characteristics of this Tale are
 
 Note that the Tale comes with a README, which has been renamed to README copy.md so that it doesn't conflict with this readme (the one you're currently reading).
 
+## Things Missing
+
+1. It looks like RO-Crate describes external data from http sources and repositories differently (there are only mentions of repository objects). This example only includes external data from a repository
+
+
 ## File Diretory Changes
 
 Adopting RO-Crate will change the directory of exported Tales, minimally.
@@ -153,6 +158,7 @@ metadata and preview files have checksums.
 
 ## Metadata Changes
 
+The snippets below are pieces from `ro-crate-metadata.jsonld`.
 
 - [Tale Creator](#Tale-Creator)
   * [Current](#Current)
@@ -379,12 +385,14 @@ Desribing external data with RO-Crate is quite cumbersome. Instead of listing fi
 
 {
     "@type: "File",
-    "@id": "./data/Quantitative and Qualitative Longitudinal Public Opinion Survey Research on Salmon and Alaska, including Values, Tradeoffs and Preferences/2015_Benchmark_Verbatims_Feb_2015.xlsx"
+    "@id": "./data/Quantitative and Qualitative Longitudinal Public Opinion Survey Research on Salmon and Alaska, including Values, Tradeoffs and Preferences/2015_Benchmark_Verbatims_Feb_2015.xlsx",
+    "size": 260096,
 }
 
 {
     "@type: "File",
-    "@id": "./data/Quantitative and Qualitative Longitudinal Public Opinion Survey Research on Salmon and Alaska, including Values, Tradeoffs and Preferences/2014_Benchmark_FINAL_Survey_Report.pdf"
+    "@id": "./data/Quantitative and Qualitative Longitudinal Public Opinion Survey Research on Salmon and Alaska, including Values, Tradeoffs and Preferences/2014_Benchmark_FINAL_Survey_Report.pdf",
+    "size": 754952,
 }
 
 ```
@@ -453,8 +461,21 @@ One difference is that RO-Crate includes a record for directories. Note that the
 
 #### Current
 
+As shown in the External-Data section above, we currently describe external datasets with
+
+```
+"Datasets": [
+{
+    "@id": "urn:uuid:c781356d-5306-4aa2-b633-7f8bc768c093",
+    "name": "Quantitative and Qualitative Longitudinal Public Opinion Survey Research on Salmon and Alaska, including Values, Tradeoffs and Preferences",
+    "@type": "Dataset",
+    "identifier": "urn:uuid:c781356d-5306-4aa2-b633-7f8bc768c093"
+}
+```
+
 #### RO-Crate
 
+To see how a dataset is described in RO-Crate, refer to the External-Data section.
 
 ### Misc-Tale-Properties
 
