@@ -234,7 +234,7 @@ With RO-Crate, the Tale Creator is listed as the `contactPoint`, which is assign
 
 {
     "@id": "http://orcid.org/0000-0002-1756-2128",
-    "@type": Person,
+    "@type": ContactPoint,
     "email": "tommythelen@gmail.com",
     "familyName": "Thelen",
     "givenName": "Thomas"
@@ -242,13 +242,7 @@ With RO-Crate, the Tale Creator is listed as the `contactPoint`, which is assign
 ```
 
 The RO-Crate spec states the the type of the object pointed to by @id for the `contactPoint` _SHOULD_ be  [ContactPoint](https://schema.org/ContactPoint). This may get confusing when the same entity fulfills multiple roles. For example, this Tale has an author that's also the `contactPoint`. The spec requires the person to be listed as type `ContactPoint`, but should also be listed as type `Person`. This is a required field to be considered a valid RO. 
-```
-{
-    "@id": "http://orcid.org/0000-0002-1756-2128",
-    "@type": ContactPoint,
-    "email": "tommythelen@gmail.com",
-}
-```
+
 
 
 ### Tale-Authors
