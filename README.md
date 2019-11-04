@@ -37,6 +37,8 @@ Note that the Tale comes with a README, which has been renamed to README copy.md
 
 1. [RO-Crate GitHub](https://github.com/ResearchObject/ro-crate)
 
+1. [RO-Crate for Python](https://github.com/researchobject/ro-crate-py)
+
 1. [RO-Crate Meeting Notes](https://docs.google.com/document/d/1vg805CJ4QXY6CCBNR-8ETgkbOCAMqSKJPCKOTNxrIbk)
 
 ## File Diretory Changes
