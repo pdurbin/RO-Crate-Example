@@ -41,7 +41,7 @@ Note that the Tale comes with a README, which has been renamed to README copy.md
 
 1. [RO-Crate Meeting Notes](https://docs.google.com/document/d/1vg805CJ4QXY6CCBNR-8ETgkbOCAMqSKJPCKOTNxrIbk)
 
-## File Diretory Changes
+## File Directory Changes
 
 Adopting RO-Crate will change the directory of exported Tales, minimally.
 
